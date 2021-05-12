@@ -103,7 +103,9 @@ class _LoginState extends State<Login> {
                               GestureDetector(
                                 child: Text(
                                   "mot de passe oublié ?",
-                                  style: TextStyle(),
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.blue),
                                 ),
                               )
                             ],
