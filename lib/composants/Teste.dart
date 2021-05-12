@@ -41,37 +41,37 @@ class _TesteState extends State<Teste> {
                   child: Wrap(
                     spacing: 10,
                     children: [
-                      Text("Il"),
-                      Container(
-                        height: 20,
-                        width: 100,
-                        child: DropdownButtonFormField(
-                            validator: (value) {
-                              if (value == null) {
-                                return "le champs est obligatoire";
-                              }
-                            },
-                            onSaved: (value) {
-                              setState(() {
-                                desc = value;
-                              });
-                            },
-                            value: desc,
-                            onChanged: (value) {
-                              setState(() {
-                                desc = value;
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Text("descendai"),
-                                value: "descendai",
-                              ),
-                              DropdownMenuItem(
-                                child: Text("descendai"),
-                                value: "descendai",
-                              )
-                            ]),
+                      Row(
+                        children: [
+                          Text("Il"),
+                          DropdownButtonFormField(
+                              validator: (value) {
+                                if (value == null) {
+                                  return "le champs est obligatoire";
+                                }
+                              },
+                              onSaved: (value) {
+                                setState(() {
+                                  desc = value;
+                                });
+                              },
+                              value: desc,
+                              onChanged: (value) {
+                                setState(() {
+                                  desc = value;
+                                });
+                              },
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("descendai"),
+                                  value: "descendai",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("descendait"),
+                                  value: "descendait",
+                                )
+                              ]),
+                        ],
                       ),
                       Text("du toit via la"),
                       Text("goutiére"),

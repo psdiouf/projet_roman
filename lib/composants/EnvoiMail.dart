@@ -6,8 +6,9 @@ class EnvoiMail {
   final String username = 'testeapplicationflutter@gmail.com';
   final String password = 'Teste2021';
   String email;
+  String code;
 
-  EnvoiMail({this.email});
+  EnvoiMail({this.email, this.code});
 
   envoi() async {
     final smtpServer = gmail(username, password);
@@ -25,7 +26,9 @@ class EnvoiMail {
       ..subject = 'Code de confirmation de compte'
       ..text = 'code de confirmation'
       ..html =
-          "<h1>Bonjour</h1>\n<p>voici si votre code de confirmation pour votre compte Roman\nveuillez le renseigné\ncode : 1234</p>";
+          "<h1>Bonjour</h1>\n<p>voici si votre code de confirmation pour votre compte Roman\nveuillez le renseigné\ncode : " +
+              code +
+              "</p>";
 
     try {
       final sendReport = await send(message, smtpServer);

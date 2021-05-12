@@ -14,9 +14,20 @@ class _InscriptionState extends State<Inscription> {
 
   connexion() {
     if (cle.currentState.validate()) {
-      EnvoiMail(email: email).envoi();
+      String code = "1234";
+      EnvoiMail(email: email, code: code).envoi();
+      Map<String, dynamic> info = {
+        "email": email,
+        "code": code,
+        "pseudo": login,
+        "mp": mp
+      };
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Validation()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => Validation(
+                    info: info,
+                  )));
     }
   }
 

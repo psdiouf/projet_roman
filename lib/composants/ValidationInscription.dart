@@ -3,14 +3,22 @@ import 'package:flutter/services.dart';
 import 'package:mailer/mailer.dart';
 import 'dart:async';
 import 'package:mailer/smtp_server.dart';
+import 'package:projet_roman/composants/DashBoard.dart';
 import 'package:projet_roman/composants/EnvoiMail.dart';
 
 class Validation extends StatefulWidget {
+  var info;
+
+  Validation({this.info});
   @override
   _ValidationState createState() => _ValidationState();
 }
 
 class _ValidationState extends State<Validation> {
+  bool c = true;
+  String t = "";
+  var cle = GlobalKey<FormState>();
+  String v1, v2, v3, v4;
   FocusNode pin2;
   FocusNode pin3;
   FocusNode pin4;
@@ -29,6 +37,7 @@ class _ValidationState extends State<Validation> {
     pin2 = FocusNode();
     pin3 = FocusNode();
     pin4 = FocusNode();
+    print(widget.info);
   }
 
   suivant(String value, FocusNode focusNode) {
@@ -38,7 +47,7 @@ class _ValidationState extends State<Validation> {
   }
 
   envoi() {
-    EnvoiMail(email: "alassdiallo58@gmail.com").envoi();
+    EnvoiMail(email: widget.info['email'], code: widget.info['code']).envoi();
     // String username = 'testeapplicationflutter@gmail.com';
     // String password = 'Teste2021';
 
@@ -69,162 +78,236 @@ class _ValidationState extends State<Validation> {
     // }
   }
 
+  valider() {
+    if (cle.currentState.validate()) {
+      String code = v1 + v2 + v3 + v4;
+      if (code == widget.info['code']) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DashBord()));
+      } else {
+        setState(() {
+          c = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        margin: EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text("Roman",
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 50,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "arial")),
-            Container(
-              width: MediaQuery.of(context).size.width / 2,
-              child: Column(
-                children: [
-                  Divider(
-                    thickness: 5,
-                    color: Colors.green,
-                  ),
-                  Divider(
-                    indent: 50,
-                    thickness: 5,
-                    color: Colors.green,
-                  ),
-                  Divider(
-                    indent: 100,
-                    thickness: 5,
-                    color: Colors.green,
-                  ),
-                ],
+        body: SafeArea(
+      child: SingleChildScrollView(
+        child: Container(
+          //height: MediaQuery.of(context).size.height,
+          width: double.infinity,
+
+          margin: EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 100,
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              "Verification compte",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Un email vous a été envoyé à votre compte veuillez verifier et saisir le numero",
-              style: TextStyle(),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Form(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    width: 50,
-                    child: TextFormField(
-                      onChanged: (value) {
-                        suivant(value, pin2);
-                      },
-                      autofocus: true,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ],
-                      // maxLength: 1,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+              Text("Roman",
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 50,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "arial")),
+              Container(
+                width: MediaQuery.of(context).size.width / 2,
+                child: Column(
+                  children: [
+                    Divider(
+                      thickness: 5,
+                      color: Colors.green,
                     ),
-                  ),
-                  SizedBox(
-                    width: 50,
-                    child: TextFormField(
-                      focusNode: pin2,
-                      onChanged: (value) {
-                        suivant(value, pin3);
-                      },
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ],
-                      // maxLength: 1,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                    Divider(
+                      indent: 50,
+                      thickness: 5,
+                      color: Colors.green,
                     ),
-                  ),
-                  SizedBox(
-                    width: 50,
-                    child: TextFormField(
-                      focusNode: pin3,
-                      onChanged: (value) {
-                        suivant(value, pin4);
-                      },
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ],
-                      // maxLength: 1,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                    Divider(
+                      indent: 100,
+                      thickness: 5,
+                      color: Colors.green,
                     ),
-                  ),
-                  SizedBox(
-                    width: 50,
-                    child: TextFormField(
-                      focusNode: pin4,
-                      onChanged: (value) {
-                        pin4.unfocus();
-                      },
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ],
-                      //maxLength: 1,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                padding: EdgeInsets.symmetric(vertical: 20),
-                minWidth: MediaQuery.of(context).size.width - 100,
-                textColor: Colors.white,
-                color: Colors.green,
-                onPressed: envoi,
-                child: Text("valider")),
-          ],
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                "Verification compte",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Un email contenant le code validation vous a été envoyé à l'adresse email <<" +
+                    widget.info['email'] +
+                    ">> verifiez et saisissez le code",
+                style: TextStyle(),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Form(
+                key: cle,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 50,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "";
+                          }
+                        },
+                        autovalidate: true,
+                        onChanged: (value) {
+                          setState(() {
+                            v1 = value;
+                          });
+                          suivant(value, pin2);
+                        },
+                        autofocus: true,
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter.digitsOnly
+                        ],
+                        // maxLength: 1,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "";
+                          }
+                        },
+                        autovalidate: true,
+                        focusNode: pin2,
+                        onChanged: (value) {
+                          setState(() {
+                            v2 = value;
+                          });
+                          suivant(value, pin3);
+                        },
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter.digitsOnly
+                        ],
+                        // maxLength: 1,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "";
+                          }
+                        },
+                        autovalidate: true,
+                        focusNode: pin3,
+                        onChanged: (value) {
+                          setState(() {
+                            v3 = value;
+                          });
+                          suivant(value, pin4);
+                        },
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter.digitsOnly
+                        ],
+                        // maxLength: 1,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "";
+                          }
+                        },
+                        autovalidate: true,
+                        focusNode: pin4,
+                        onChanged: (value) {
+                          setState(() {
+                            v4 = value;
+                          });
+                          pin4.unfocus();
+                        },
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          WhitelistingTextInputFormatter.digitsOnly
+                        ],
+                        //maxLength: 1,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              !c
+                  ? SizedBox(
+                      height: 20,
+                      child: Text("erreur le code n'est pas valide",
+                          style: TextStyle(color: Colors.red)),
+                    )
+                  : Text(""),
+              SizedBox(
+                height: 10,
+              ),
+              FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  minWidth: MediaQuery.of(context).size.width - 100,
+                  textColor: Colors.white,
+                  color: Colors.green,
+                  onPressed: valider,
+                  child: Text("valider")),
+              SizedBox(
+                height: 30,
+              ),
+              GestureDetector(child: Text("Renvoyer le code ?"), onTap: envoi)
+            ],
+          ),
         ),
       ),
     ));
