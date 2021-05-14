@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:mailer/mailer.dart';
 import 'dart:async';
 import 'package:mailer/smtp_server.dart';
-import 'package:projet_roman/composants/DashBoard.dart';
-import 'package:projet_roman/composants/EnvoiMail.dart';
+import 'package:roman/composants/Couleur.dart';
+import 'package:roman/composants/DashBoard.dart';
+import 'package:roman/composants/EnvoiMail.dart';
 
 class Validation extends StatefulWidget {
   var info;
@@ -107,38 +108,22 @@ class _ValidationState extends State<Validation> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 100,
+                height: 70,
               ),
-              Text("Roman",
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 50,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "arial")),
-              Container(
-                width: MediaQuery.of(context).size.width / 2,
-                child: Column(
-                  children: [
-                    Divider(
-                      thickness: 5,
-                      color: Colors.green,
-                    ),
-                    Divider(
-                      indent: 50,
-                      thickness: 5,
-                      color: Colors.green,
-                    ),
-                    Divider(
-                      indent: 100,
-                      thickness: 5,
-                      color: Colors.green,
-                    ),
-                  ],
-                ),
+              Image.asset(
+                "images/Logo_couleur.png",
+                height: MediaQuery.of(context).size.height / 3,
               ),
+              // Text("Roman",
+              //     style: TextStyle(
+              //         color: Colors.green,
+              //         fontSize: 50,
+              //         fontStyle: FontStyle.italic,
+              //         fontWeight: FontWeight.w500,
+              //         fontFamily: "arial")),
+
               SizedBox(
-                height: 50,
+                height: 10,
               ),
               Text(
                 "Verification compte",
@@ -147,12 +132,25 @@ class _ValidationState extends State<Validation> {
               SizedBox(
                 height: 10,
               ),
-              Text(
-                "Un email contenant le code validation vous a été envoyé à l'adresse email <<" +
-                    widget.info['email'] +
-                    ">> verifiez et saisissez le code",
-                style: TextStyle(),
-              ),
+              RichText(
+                  text: TextSpan(
+                text:
+                    "Un email contenant le code de validation vous a été envoyé à l'adresse email suivant ",
+                style: TextStyle(color: Colors.black, height: 1.5),
+                children: [
+                  TextSpan(
+                    text: widget.info['email'],
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                  TextSpan(
+                    text: " verifiez et saisissez le code ici",
+                  )
+                ],
+              )),
               SizedBox(
                 height: 30,
               ),
@@ -299,13 +297,16 @@ class _ValidationState extends State<Validation> {
                   padding: EdgeInsets.symmetric(vertical: 20),
                   minWidth: MediaQuery.of(context).size.width - 100,
                   textColor: Colors.white,
-                  color: Colors.green,
+                  color: rouge,
                   onPressed: valider,
                   child: Text("valider")),
               SizedBox(
                 height: 30,
               ),
-              GestureDetector(child: Text("Renvoyer le code ?"), onTap: envoi)
+              GestureDetector(
+                  child: Text("Renvoyer le code ?",
+                      style: TextStyle(color: Colors.blue)),
+                  onTap: envoi)
             ],
           ),
         ),

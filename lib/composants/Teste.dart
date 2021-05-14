@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:projet_roman/composants/inscription.dart';
+import 'package:roman/composants/Couleur.dart';
+import 'package:roman/composants/inscription.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Teste extends StatefulWidget {
@@ -19,13 +20,14 @@ class _TesteState extends State<Teste> {
   String rep3 = "c'en";
   String rep4 = "voir";
   bool db = false;
+  final cle = GlobalKey<FormState>();
   var gr1;
   var gr2;
   var gr3;
   var gr4;
   int rep = 0;
   Timer timer;
-  final int temps = 10;
+  final int temps = 60;
   int t;
 
   @override
@@ -41,6 +43,7 @@ class _TesteState extends State<Teste> {
   }
 
   reessayer() {
+    //cle.currentState.reset();
     Navigator.pop(context);
     setState(() {
       t = temps;
@@ -159,6 +162,7 @@ class _TesteState extends State<Teste> {
     setState(() {
       db = false;
     });
+    cle.currentState.reset();
   }
   // CountDownController _controller = CountDownController();
 
@@ -171,349 +175,431 @@ class _TesteState extends State<Teste> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Roman",
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 50,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "arial")),
-              SizedBox(height: 20),
-              CircularPercentIndicator(
-                radius: 130.0,
-                animation: true,
-                animationDuration: 0,
-                lineWidth: 15.0,
-                percent: t.toDouble() / temps,
-                center: new Text(
-                  t.toString(),
-                  style: new TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20.0),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(top: 20),
+            color: Colors.white,
+            //height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "images/Logo_couleur.png",
+                  height: MediaQuery.of(context).size.height / 4,
                 ),
-                circularStrokeCap: CircularStrokeCap.butt,
-                backgroundColor: Colors.green,
-                progressColor: t < 10 ? Colors.red : Colors.blue,
-              ),
-              SizedBox(
-                height: 50,
-              ),
+                // Text("Roman",
+                //     style: TextStyle(
+                //         color: Colors.green,
+                //         fontSize: 50,
+                //         fontStyle: FontStyle.italic,
+                //         fontWeight: FontWeight.w500,
+                //         fontFamily: "arial")),
+                SizedBox(height: 20),
+                CircularPercentIndicator(
+                  radius: 130.0,
+                  animation: true,
+                  animationDuration: 0,
+                  lineWidth: 15.0,
+                  percent: t.toDouble() / temps,
+                  center: new Text(
+                    t.toString(),
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                  circularStrokeCap: CircularStrokeCap.butt,
+                  backgroundColor: rouge,
+                  progressColor: t < 10 ? Colors.blue[900] : Colors.blue[900],
+                ),
+                SizedBox(
+                  height: 50,
+                ),
 
-              // Timer(Duration(seconds: 5), temps),
-              Container(
-                // margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Form(
+                // Timer(Duration(seconds: 5), temps),
+                Container(
+                  // margin: EdgeInsets.symmetric(horizontal: 20),
                   child: Card(
                     margin: EdgeInsets.only(bottom: 20),
                     child: Container(
                       padding: EdgeInsets.all(10),
-                      child: Text(
-                        "Il ${desc} du toit via la ${g}  le soleil rayonnait si fort que ${e}  était délicieux ${v} jouissif pour les lézards.",
-                        style: TextStyle(height: 3),
-                      ),
+                      child: RichText(
+                          text: TextSpan(
+                              text: "IL ",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  height: 3,
+                                  wordSpacing: 3),
+                              children: [
+                            TextSpan(
+                                text: desc,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.green[900])),
+                            TextSpan(
+                              text: "  du toit via la  ",
+                              // style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontStyle: FontStyle.italic,
+                              //     color: Colors.green[900])
+                            ),
+                            TextSpan(
+                                text: g,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.green[900])),
+                            TextSpan(
+                              text: "  le soleil rayonnait si fort que  ",
+                              // style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontStyle: FontStyle.italic,
+                              //     color: Colors.green[900])
+                            ),
+                            TextSpan(
+                                text: e,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.green[900])),
+                            TextSpan(
+                              text: "  était délicieux  ",
+                              // style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontStyle: FontStyle.italic,
+                              //     color: Colors.green[900])
+                            ),
+                            TextSpan(
+                                text: v,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.green[900])),
+                            TextSpan(
+                              text: "  jouissif pour les lézards.  ",
+                              // style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontStyle: FontStyle.italic,
+                              //     color: Colors.green[900])
+                            ),
+                          ])),
+
+                      // child: Text(
+                      //   "Il ${desc} du toit via la ${g}  le soleil rayonnait si fort que ${e}  était délicieux ${v} jouissif pour les lézards.",
+                      //   style: TextStyle(height: 3),
+                      // ),
                     ),
                   ),
                 ),
-              ),
-              !db
-                  ? Container(
-                      margin: EdgeInsets.all(20),
-                      child: Text(
-                          "Pour vous inscrire vous devez d'abord validé ce teste elle dure 1 min aprés le debut"),
-                    )
-                  : Column(
-                      children: [
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Card(
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 30),
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
-                                        child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            color: Colors.green,
-                                            child: Text(
-                                              "1",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              //title: Text("descendai"),
-                                              value: "descendai",
-                                              groupValue: gr1,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr1 = value;
-                                                  desc = value;
-                                                });
-                                              }),
-                                          Text("descendai")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              //title: Text("dessendait"),
-                                              value: "dessendait",
-                                              groupValue: gr1,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr1 = value;
-                                                  desc = value;
-                                                });
-                                              }),
-                                          Text("dessendai")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "descendait",
-                                              groupValue: gr1,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr1 = value;
-                                                  desc = value;
-                                                });
-                                              }),
-                                          Text("descendait")
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 30),
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            color: Colors.green,
-                                            child: Text(
-                                              "2",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "goutiére",
-                                              groupValue: gr2,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr2 = value;
-                                                  g = value;
-                                                });
-                                              }),
-                                          Text("goutiére")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "gouttiére",
-                                              groupValue: gr2,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr2 = value;
-                                                  g = value;
-                                                });
-                                              }),
-                                          Text("gouttiére")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "gouttiaire",
-                                              groupValue: gr2,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr2 = value;
-                                                  g = value;
-                                                });
-                                              }),
-                                          Text("goutiaire")
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 30),
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
-                                        child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            color: Colors.green,
-                                            child: Text(
-                                              "3",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "s'en",
-                                              groupValue: gr3,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr3 = value;
-                                                  e = value;
-                                                });
-                                              }),
-                                          Text("s'en")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "c'en",
-                                              groupValue: gr3,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr3 = value;
-                                                  e = value;
-                                                });
-                                              }),
-                                          Text("c'en")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "sans",
-                                              groupValue: gr3,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr3 = value;
-                                                  e = value;
-                                                });
-                                              }),
-                                          Text("sans")
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                child: Container(
-                                  padding: EdgeInsets.only(right: 30),
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
-                                        child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            color: Colors.green,
-                                            child: Text(
-                                              "4",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "voire",
-                                              groupValue: gr4,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr4 = value;
-                                                  v = value;
-                                                });
-                                              }),
-                                          Text("voire")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "voir",
-                                              groupValue: gr4,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr4 = value;
-                                                  v = value;
-                                                });
-                                              }),
-                                          Text("voir")
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                              value: "voar",
-                                              groupValue: gr4,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  gr4 = value;
-                                                  v = value;
-                                                });
-                                              }),
-                                          Text("voar")
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
 
-              SizedBox(
-                height: 30,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    minWidth: MediaQuery.of(context).size.width - 50,
-                    textColor: Colors.white,
-                    color: Colors.green,
-                    onPressed: !db ? commencer : terminer,
-                    // () {
-                    //   Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //           builder: (context) => Inscription()));
-                    // },
-                    child: Text(!db ? "commencer" : "soumettre")),
-              )
-            ],
+                !db
+                    ? Container(
+                        margin: EdgeInsets.all(20),
+                        child: Text(
+                          "Pour vous inscrire vous devez d'abord valider ce teste il dure 1 min aprés le debut",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              height: 2,
+                              wordSpacing: 3),
+                        ),
+                      )
+                    : Form(
+                        key: cle,
+                        child: Column(
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Card(
+                                    child: Container(
+                                      padding: EdgeInsets.only(right: 30),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            child: Container(
+                                                padding: EdgeInsets.all(10),
+                                                color: rouge,
+                                                child: Text(
+                                                  "1",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  //title: Text("descendai"),
+                                                  value: "descendai",
+                                                  groupValue: gr1,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr1 = value;
+                                                      desc = value;
+                                                    });
+                                                  }),
+                                              Text("descendai")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  //title: Text("dessendait"),
+                                                  value: "dessendait",
+                                                  groupValue: gr1,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr1 = value;
+                                                      desc = value;
+                                                    });
+                                                  }),
+                                              Text("dessendai")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "descendait",
+                                                  groupValue: gr1,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr1 = value;
+                                                      desc = value;
+                                                    });
+                                                  }),
+                                              Text("descendait")
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    child: Container(
+                                      padding: EdgeInsets.only(right: 30),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: Container(
+                                                padding: EdgeInsets.all(10),
+                                                color: rouge,
+                                                child: Text(
+                                                  "2",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "goutiére",
+                                                  groupValue: gr2,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr2 = value;
+                                                      g = value;
+                                                    });
+                                                  }),
+                                              Text("goutiére")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "gouttiére",
+                                                  groupValue: gr2,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr2 = value;
+                                                      g = value;
+                                                    });
+                                                  }),
+                                              Text("gouttiére")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "gouttiaire",
+                                                  groupValue: gr2,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr2 = value;
+                                                      g = value;
+                                                    });
+                                                  }),
+                                              Text("goutiaire")
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    child: Container(
+                                      padding: EdgeInsets.only(right: 30),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            child: Container(
+                                                padding: EdgeInsets.all(10),
+                                                color: rouge,
+                                                child: Text(
+                                                  "3",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "s'en",
+                                                  groupValue: gr3,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr3 = value;
+                                                      e = value;
+                                                    });
+                                                  }),
+                                              Text("s'en")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "c'en",
+                                                  groupValue: gr3,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr3 = value;
+                                                      e = value;
+                                                    });
+                                                  }),
+                                              Text("c'en")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "sans",
+                                                  groupValue: gr3,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr3 = value;
+                                                      e = value;
+                                                    });
+                                                  }),
+                                              Text("sans")
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Card(
+                                    child: Container(
+                                      padding: EdgeInsets.only(right: 30),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            child: Container(
+                                                padding: EdgeInsets.all(10),
+                                                color: rouge,
+                                                child: Text(
+                                                  "4",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "voire",
+                                                  groupValue: gr4,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr4 = value;
+                                                      v = value;
+                                                    });
+                                                  }),
+                                              Text("voire")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "voir",
+                                                  groupValue: gr4,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr4 = value;
+                                                      v = value;
+                                                    });
+                                                  }),
+                                              Text("voir")
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  value: "voar",
+                                                  groupValue: gr4,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      gr4 = value;
+                                                      v = value;
+                                                    });
+                                                  }),
+                                              Text("voar")
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
+
+                SizedBox(
+                  height: 30,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      minWidth: MediaQuery.of(context).size.width - 50,
+                      textColor: Colors.white,
+                      color: rouge,
+                      onPressed: !db ? commencer : terminer,
+                      // () {
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => Inscription()));
+                      // },
+                      child: Text(!db ? "commencer" : "soumettre")),
+                )
+              ],
+            ),
           ),
         ),
       ),
