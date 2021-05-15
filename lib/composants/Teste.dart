@@ -66,7 +66,7 @@ class _TesteState extends State<Teste> {
     timer = Timer.periodic(Duration(seconds: 1), (ti) {
       print(ti);
       if (t < 1) {
-        print("temps ecoulé");
+        print("Temps ecoulé");
         timer.cancel();
         terminer();
       } else {
@@ -141,16 +141,16 @@ class _TesteState extends State<Teste> {
       type: trv < 4 ? AlertType.error : AlertType.success,
       title: "Resultats",
       desc: trv < 4
-          ? "Désolé vous n'avez pas validé le teste veillez reéssayer"
-          : "felicitation vous avez reussi le teste",
+          ? "Désolé, vous n'avez pas validé le test. Veuillez réessayer"
+          : "Felicitation ! Vous avez reussi le test",
       content: Text(
-        "trouvés   ${trv}/4",
+        "Trouvés   ${trv}/4",
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
       buttons: [
         DialogButton(
           child: Text(
-            trv < 4 ? "reéssayer" : "passer a l'inscription",
+            trv < 4 ? "Réessayer" : "Passer a l'inscription",
             // style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: trv < 4 ? reessayer : inscription,
@@ -596,7 +596,7 @@ class _TesteState extends State<Teste> {
                       //       MaterialPageRoute(
                       //           builder: (context) => Inscription()));
                       // },
-                      child: Text(!db ? "commencer" : "soumettre")),
+                      child: Text(!db ? "Commencer" : "Soumettre")),
                 )
               ],
             ),

@@ -23,7 +23,7 @@ class Accueil extends StatelessWidget {
           children: [
             Image.asset(
               "images/Logo_blanc.png",
-              //height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height / 3,
             ),
             // Text("Roman",
             //     style: TextStyle(

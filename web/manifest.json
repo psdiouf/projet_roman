@@ -1,11 +1,11 @@
 {
-    "name": "projet_roman",
-    "short_name": "projet_roman",
+    "name": "Roman",
+    "short_name": "Roman",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Orthographe correcte exigée",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
