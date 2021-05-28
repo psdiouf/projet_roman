@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roman/composants/Accueil.dart';
+import 'package:roman/composants/Lancement.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Accueil(),
+      home: Lancement(),
     );
   }
 }

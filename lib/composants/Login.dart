@@ -1,8 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:roman/Controller/Connexion.dart';
 import 'package:roman/composants/Couleur.dart';
+import 'package:roman/composants/DashBoard.dart';
 import 'package:roman/composants/Teste.dart';
 import 'package:roman/composants/inscription.dart';
+import 'dart:convert';
+import 'dart:convert' as convert;
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -15,9 +21,26 @@ class _LoginState extends State<Login> {
   String login, mp;
   bool choix = false;
 
-  connexion() {
+  Future<void> connexion() async {
+    SharedPreferences localstorage = await SharedPreferences.getInstance();
     if (cle.currentState.validate()) {
-      print("valider");
+      Map<String, dynamic> user = {"name": login, "password": mp};
+
+      var reponse = await Connexion().envoideDonnnee(user, "login");
+      print(reponse.body);
+
+      var d = json.decode(reponse.body);
+      if (!d['success']) {
+        print('login ou mot de passe incorrect');
+        return;
+      }
+      print(d['token']);
+
+      localstorage.setString("token", json.encode(d['token']));
+      localstorage.setString('user', json.encode(d['user']));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => DashBord()));
+      // print("valider");
     }
   }
 

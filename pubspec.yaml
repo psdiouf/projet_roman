@@ -29,6 +29,23 @@ dependencies:
   animator: ^3.0.0
   percent_indicator: ^3.0.1
   rflutter_alert: ^2.0.2
+  postgres: ^2.1.1
+  geolocator: ^5.1.5
+  data_tables: ^1.0.3
+  image_picker: ^0.6.7+22
+  carousel_pro: ^1.0.0
+  http: ^0.12.2
+  path_provider: ^2.0.2
+  flutter_radar: ^3.1.1
+  shared_preferences: ^2.0.6
+  location: ^3.0.0
+  swipe_to: 0.0.1+8
+  intl: ^0.17.0
+  datetime_picker_formfield: ^1.0.0
+  socket_io_client: ^1.0.0
+  
+  # flutter_audio_recorder: ^0.5.5
+  # shared_preferences_windows: ^2.1.0
 
 
   # The following adds the Cupertino Icons font to your application.

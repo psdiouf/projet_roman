@@ -2,6 +2,7 @@
     package="com.example.projet_roman">
    <application
         android:label="projet_roman"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
