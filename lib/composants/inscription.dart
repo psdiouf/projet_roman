@@ -76,13 +76,13 @@ class _InscriptionState extends State<Inscription> {
                             },
                             validator: (value) {
                               if (value.isEmpty) {
-                                return "veuillez entrer votre pseudo";
+                                return "Veuillez entrer votre pseudo";
                               }
                             },
                             decoration: InputDecoration(
                                 focusColor: Colors.green,
                                 prefixIcon: Icon(Icons.person),
-                                labelText: "entrer votre pseudo",
+                                labelText: "Entrer votre pseudo",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10))),
                           ),
@@ -108,7 +108,7 @@ class _InscriptionState extends State<Inscription> {
                             decoration: InputDecoration(
                                 focusColor: Colors.green,
                                 prefixIcon: Icon(Icons.mail),
-                                labelText: "entrer votre email",
+                                labelText: "Entrer votre email",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10))),
                           ),
@@ -124,10 +124,10 @@ class _InscriptionState extends State<Inscription> {
                             },
                             validator: (value) {
                               if (value.isEmpty) {
-                                return "veuillez entrer votre mot de passe";
+                                return "Veuillez entrer votre mot de passe";
                               } else {
                                 if (value.length < 6) {
-                                  return "le mot de passe doit contenir aumoins 6 caractéres";
+                                  return "Le mot de passe doit contenir aumoins 6 caractéres";
                                 }
                               }
                             },
@@ -143,7 +143,7 @@ class _InscriptionState extends State<Inscription> {
                                     child: _obscureText
                                         ? Icon(Icons.visibility)
                                         : Icon(Icons.visibility_off)),
-                                labelText: "entrer votre mot de passe",
+                                labelText: "Entrer votre mot de passe",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10))),
                           ),
@@ -162,10 +162,10 @@ class _InscriptionState extends State<Inscription> {
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value.isEmpty) {
-                                return "veuillez confirmer votre mot de passe";
+                                return "Veuillez confirmer votre mot de passe";
                               } else {
                                 if (config != mp) {
-                                  return "les deux mot de passe ne correspondent pas";
+                                  return "Les deux mot de passe ne correspondent pas";
                                 }
                               }
                             },
@@ -181,7 +181,7 @@ class _InscriptionState extends State<Inscription> {
                                     child: _obscureText
                                         ? Icon(Icons.visibility)
                                         : Icon(Icons.visibility_off)),
-                                labelText: "confirmer votre mot de passe",
+                                labelText: "Confirmer votre mot de passe",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10))),
                           ),

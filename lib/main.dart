@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Application Roman',
+      title: 'Roman',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
